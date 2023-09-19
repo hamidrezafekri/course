@@ -6,7 +6,7 @@ services:
     image: postgres:14.1
     container_name: postgres
     ports:
-      - 5432:5432
+      - 5434:5432
     environment:
       - POSTGRES_DB=socialmedia
       - POSTGRES_USER=postgres
@@ -37,7 +37,7 @@ services:
     image: redis:7
     container_name: redis
     ports:
-      - 6379:6379
+      - 6380:6379
     volumes:
       - redis-data:/data
 
