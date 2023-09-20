@@ -44,5 +44,5 @@ class PostFilter(FilterSet):
         model = Post
         fields = (
             "slug",
-            "tilte",
+            "title",
         )

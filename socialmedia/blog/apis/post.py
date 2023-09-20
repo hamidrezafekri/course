@@ -5,6 +5,7 @@ from rest_framework.views import APIView
 
 from socialmedia.api.mixins import ApiAuthMixin
 from socialmedia.api.pagination import LimitOffsetPagination
+from socialmedia.blog.models import Post
 
 
 class PostApi(ApiAuthMixin, APIView):

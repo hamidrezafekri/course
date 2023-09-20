@@ -4,15 +4,18 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from socialmedia.api.mixins import ApiAuthMixin
-from socialmedia.api.pagination import LimitOffsetPagination
+from socialmedia.api.pagination import LimitOffsetPagination, get_paginated_response
+from socialmedia.blog.models import Subcription
+from socialmedia.blog.selectors.posts import get_subscribers
+from socialmedia.blog.services.post import unsubscribe, subscribe
 
 
-class SubscriptionDetailApi(ApiAuthMixin , APIView):
+class SubscribeDetailApi(ApiAuthMixin , APIView):
 
     def delete(self , request , email):
 
         try:
-            unsubscribe(user= request.user , email = email):
+            unsubscribe(user= request.user , email = email)
         except Exception as ex:
             return Response(
                 {"detail": "database error" + str(ex)},
@@ -34,7 +37,7 @@ class SubscribeApi(ApiAuthMixin , APIView):
         email = serializers.SerializerMethodField('get_username')
 
         class Meta:
-            model = Subscription
+            model = Subcription
             fields = ("email" ,)
 
         def get_username(self , subscription):
@@ -45,7 +48,7 @@ class SubscribeApi(ApiAuthMixin , APIView):
     )
     def get(self , request):
         user = request.user
-        query = get_subcription(user = user)
+        query = get_subscribers(user = user)
         return get_paginated_response(
             request = request,
             pagination_class = self.Pagination,
