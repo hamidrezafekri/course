@@ -4,7 +4,7 @@ import os
 
 from celery import Celery
 
-os.environ("DJANGO_SETTING_MODULE" , "config.django.base")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE" , "config.django.base")
 
 app = Celery("styleguide_example")
 
