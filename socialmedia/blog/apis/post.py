@@ -72,8 +72,8 @@ class PostApi(ApiAuthMixin, APIView):
         filters_serializer.is_valid(raise_exception=True)
 
         try:
-            query = post_list(filters=filters_serializer.validated_data, user=request.data)
-
+            query = post_list(filters=filters_serializer.validated_data, user=request.user)
+            print(f'hello ----------->{query}')
         except Exception as ex:
             return Response(
                 {"detail": "Filter Error" + str(ex)},
@@ -84,6 +84,7 @@ class PostApi(ApiAuthMixin, APIView):
             serializer_class=self.OutPutSerializer,
             queryset=query,
             view=self,
+            request = request
         )
 
 
