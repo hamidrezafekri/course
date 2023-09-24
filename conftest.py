@@ -39,5 +39,3 @@ def subscription1(user1 , user2):
 def post1(user1):
     return PostFactory(author = user1)
 
-
-
